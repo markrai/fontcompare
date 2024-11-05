@@ -2,7 +2,7 @@
 
 Font Compare is an easy way to dynamically compare locally hosted fonts.
 
-Demo: https://www.tenacitydc.com/fontcompare
+Demo: https://tenacitydc.com/fontcompare
 
 # Instructions:
 
