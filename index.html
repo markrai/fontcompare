@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Compare v1.0</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 20px;
+            margin: 0;
+            background-color: #E5E4E2;
+            color: #000000;
+            gap: 20px;
+            font-family: sans-serif;
+        }
+
+        .logo {
+            max-width: 500px; 
+            margin-bottom: 20px; 
+        }
+
+        .font-sample-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .font-filename {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 5px;
+        }
+
+        .font-sample {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        
+        .text-input {
+            padding: 10px;
+            font-size: 18px;
+            width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 10px; /* Rounded corners */
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        
+        .text-input:focus {
+            border-color: #007BFF;
+        }
+
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        
+        .custom-file-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #317b45;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        
+        .custom-file-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="logo.png" alt="Logo" class="logo">
+
+    
+    <div class="file-input-wrapper">
+        <button class="custom-file-button" id="fontButton">Choose Fonts</button>
+        <input type="file" class="file-input" accept=".ttf, .otf" multiple onchange="loadFonts(event)" />
+    </div>
+
+    
+    <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
+
+    <div id="fontSamples">
+        
+    </div>
+
+    <script>
+        
+        let currentText = "Sample Text";
+
+        
+        function loadFonts(event) {
+            const fontContainer = document.getElementById('fontSamples');
+            const fontButton = document.getElementById('fontButton'); 
+            fontContainer.innerHTML = ''; 
+
+            const files = Array.from(event.target.files);
+
+            files.forEach((file, index) => {
+                const fontName = `CustomFont${index}`;
+                const fontUrl = URL.createObjectURL(file);
+
+                
+                const fontFace = new FontFace(fontName, `url(${fontUrl})`);
+                fontFace.load().then((loadedFont) => {
+                    document.fonts.add(loadedFont);
+
+                
+                    const sampleContainer = document.createElement('div');
+                    sampleContainer.classList.add('font-sample-container');
+
+                
+                    const fileNameDisplay = document.createElement('div');
+                    fileNameDisplay.classList.add('font-filename');
+                    fileNameDisplay.innerText = file.name;
+                    sampleContainer.appendChild(fileNameDisplay);
+
+                
+                    const sample = document.createElement('div');
+                    sample.classList.add('font-sample');
+                    sample.style.fontFamily = fontName;
+                    sample.innerText = currentText;
+                    sampleContainer.appendChild(sample);
+
+                
+                    fontContainer.appendChild(sampleContainer);
+                });
+            });
+
+            
+            fontButton.innerText = `Choose Fonts (${files.length})`;
+        }
+
+
+        function updateText(text) {
+            currentText = text;
+            document.querySelectorAll('.font-sample').forEach(sample => {
+                sample.innerText = currentText;
+            });
+        }
+    </script>
+</body>
+</html>
