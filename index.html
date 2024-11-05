@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Compare v1.0</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 20px;
+            margin: 0;
+            background-color: #E5E4E2;
+            color: #000000;
+            gap: 20px;
+            font-family: sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .logo {
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        .font-sample-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .font-filename {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 5px;
+        }
+
+        .font-sample {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .text-input {
+            padding: 10px;
+            font-size: 18px;
+            width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .text-input:focus {
+            border-color: #007BFF;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .custom-file-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #317b45;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .custom-file-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        body.dark-mode .text-input {
+            border-color: #444444;
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+            gap: 10px;
+        }
+
+        .toggle-switch label {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            transition: background-color 0.3s;
+            border-radius: 15px;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        /* Checked State */
+        .toggle-switch input:checked + .slider {
+            background-color: white;
+        }
+
+        .toggle-switch input:checked + .slider::before {
+            transform: translateX(25px);
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="logolight.png" alt="Logo" class="logo" id="logo">
+
+    <div class="file-input-wrapper">
+        <button class="custom-file-button" id="fontButton">Choose Fonts</button>
+        <input type="file" class="file-input" accept=".ttf, .otf" multiple onchange="loadFonts(event)" />
+    </div>
+
+    <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
+
+    <div id="fontSamples"></div>
+
+    <!-- Dark Mode Toggle Switch -->
+    <div class="toggle-switch">
+        <label>
+            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <script>
+        let currentText = "Sample Text";
+
+        function loadFonts(event) {
+            const fontContainer = document.getElementById('fontSamples');
+            const fontButton = document.getElementById('fontButton'); 
+            fontContainer.innerHTML = ''; 
+
+            const files = Array.from(event.target.files);
+
+            files.forEach((file, index) => {
+                const fontName = `CustomFont${index}`;
+                const fontUrl = URL.createObjectURL(file);
+
+                const fontFace = new FontFace(fontName, `url(${fontUrl})`);
+                fontFace.load().then((loadedFont) => {
+                    document.fonts.add(loadedFont);
+
+                    const sampleContainer = document.createElement('div');
+                    sampleContainer.classList.add('font-sample-container');
+
+                    const fileNameDisplay = document.createElement('div');
+                    fileNameDisplay.classList.add('font-filename');
+                    fileNameDisplay.innerText = file.name;
+                    sampleContainer.appendChild(fileNameDisplay);
+
+                    const sample = document.createElement('div');
+                    sample.classList.add('font-sample');
+                    sample.style.fontFamily = fontName;
+                    sample.innerText = currentText;
+                    sampleContainer.appendChild(sample);
+
+                    fontContainer.appendChild(sampleContainer);
+                });
+            });
+
+            fontButton.innerText = `Choose Fonts (${files.length})`;
+        }
+
+        function updateText(text) {
+            currentText = text;
+            document.querySelectorAll('.font-sample').forEach(sample => {
+                sample.innerText = currentText;
+            });
+        }
+
+        // Toggle between light and dark modes
+        function toggleDarkMode() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+            
+            const logo = document.getElementById('logo');
+            if (darkModeToggle.checked) {
+                logo.src = 'logodark.png';
+            } else {
+                logo.src = 'logolight.png';
+            }
+        }
+    </script>
+</body>
+</html>
