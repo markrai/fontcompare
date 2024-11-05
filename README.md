@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# fontcompare
-an easy way to dynamically compare locally hosted fonts
-=======
 # Font Compare v1.0
 
 Font Compare is an easy way to dynamically compare locally hosted fonts.
