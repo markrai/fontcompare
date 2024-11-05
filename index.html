@@ -16,20 +16,12 @@
             color: #000000;
             gap: 20px;
             font-family: sans-serif;
-<<<<<<< HEAD
             transition: background-color 0.3s, color 0.3s;
         }
 
         .logo {
             max-width: 500px;
             margin-bottom: 20px;
-=======
-        }
-
-        .logo {
-            max-width: 500px; 
-            margin-bottom: 20px; 
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         }
 
         .font-sample-container {
@@ -48,46 +40,26 @@
             margin: 0;
         }
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         .text-input {
             padding: 10px;
             font-size: 18px;
             width: 300px;
             border: 2px solid #ccc;
-<<<<<<< HEAD
             border-radius: 10px;
-=======
-            border-radius: 10px; /* Rounded corners */
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
             outline: none;
             transition: border-color 0.3s;
         }
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         .text-input:focus {
             border-color: #007BFF;
         }
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         .file-input-wrapper {
             position: relative;
             display: inline-block;
             width: 300px;
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         .file-input {
             opacity: 0;
             position: absolute;
@@ -98,10 +70,6 @@
             cursor: pointer;
         }
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         .custom-file-button {
             display: inline-block;
             padding: 10px 20px;
@@ -116,7 +84,6 @@
             transition: background-color 0.3s;
         }
 
-<<<<<<< HEAD
         .custom-file-button:hover {
             background-color: #0056b3;
         }
@@ -187,30 +154,17 @@
             transform: translateX(25px);
             background-color: black;
         }
-=======
-        
-        .custom-file-button:hover {
-            background-color: #0056b3;
-        }
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
     </style>
 </head>
 <body>
     
-<<<<<<< HEAD
     <img src="logolight.png" alt="Logo" class="logo" id="logo">
 
-=======
-    <img src="logo.png" alt="Logo" class="logo">
-
-    
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
     <div class="file-input-wrapper">
         <button class="custom-file-button" id="fontButton">Choose Fonts</button>
         <input type="file" class="file-input" accept=".ttf, .otf" multiple onchange="loadFonts(event)" />
     </div>
 
-<<<<<<< HEAD
     <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
 
     <div id="fontSamples"></div>
@@ -226,20 +180,6 @@
     <script>
         let currentText = "Sample Text";
 
-=======
-    
-    <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
-
-    <div id="fontSamples">
-        
-    </div>
-
-    <script>
-        
-        let currentText = "Sample Text";
-
-        
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         function loadFonts(event) {
             const fontContainer = document.getElementById('fontSamples');
             const fontButton = document.getElementById('fontButton'); 
@@ -251,66 +191,37 @@
                 const fontName = `CustomFont${index}`;
                 const fontUrl = URL.createObjectURL(file);
 
-<<<<<<< HEAD
-=======
-                
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
                 const fontFace = new FontFace(fontName, `url(${fontUrl})`);
                 fontFace.load().then((loadedFont) => {
                     document.fonts.add(loadedFont);
 
-<<<<<<< HEAD
                     const sampleContainer = document.createElement('div');
                     sampleContainer.classList.add('font-sample-container');
 
-=======
-                
-                    const sampleContainer = document.createElement('div');
-                    sampleContainer.classList.add('font-sample-container');
-
-                
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
                     const fileNameDisplay = document.createElement('div');
                     fileNameDisplay.classList.add('font-filename');
                     fileNameDisplay.innerText = file.name;
                     sampleContainer.appendChild(fileNameDisplay);
 
-<<<<<<< HEAD
-=======
-                
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
                     const sample = document.createElement('div');
                     sample.classList.add('font-sample');
                     sample.style.fontFamily = fontName;
                     sample.innerText = currentText;
                     sampleContainer.appendChild(sample);
 
-<<<<<<< HEAD
-=======
-                
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
                     fontContainer.appendChild(sampleContainer);
                 });
             });
 
-<<<<<<< HEAD
             fontButton.innerText = `Choose Fonts (${files.length})`;
         }
 
-=======
-            
-            fontButton.innerText = `Choose Fonts (${files.length})`;
-        }
-
-
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
         function updateText(text) {
             currentText = text;
             document.querySelectorAll('.font-sample').forEach(sample => {
                 sample.innerText = currentText;
             });
         }
-<<<<<<< HEAD
 
         // Toggle between light and dark modes
         function toggleDarkMode() {
@@ -324,8 +235,6 @@
                 logo.src = 'logolight.png';
             }
         }
-=======
->>>>>>> 7c383cee7ed0f9d50387c5dc320a04aaad5492f7
     </script>
 </body>
 </html>
