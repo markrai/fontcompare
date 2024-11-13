@@ -35,9 +35,16 @@
             margin-bottom: 5px;
         }
 
+        #fontSamples {
+            width: 100%;
+        }
+        
         .font-sample {
             font-size: 50px;
-            margin: 0;
+            margin: 0px auto;
+            max-width: 90%;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         .text-input {
@@ -87,7 +94,25 @@
         .custom-file-button:hover {
             background-color: #0056b3;
         }
-
+    
+        /* Font Parameters Styles */
+        #fontParams * {
+            display: inline-block;
+        }
+        
+        #fontParams {
+            display: none;
+        }
+        
+        .range-slider{
+            vertical-align: middle;
+            accent-color: #ff2f34;
+        }
+        
+        label[for=fontSize]{
+            width:4em;
+        }
+        
         /* Dark Mode Styles */
         body.dark-mode {
             background-color: #000000;
@@ -165,9 +190,14 @@
         <input type="file" class="file-input" accept=".ttf, .otf" multiple onchange="loadFonts(event)" />
     </div>
 
-    <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
+    <div id="fontParams">
+        <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
+        <input type="range" id="fontSize" class="range-slider" min="5" max="200" value="50" autocomplete="off" oninput="updateSize(this.value, 'px')">
+        <label for="fontSize"><span>50</span>px</label>
+    </div>
 
-    <div id="fontSamples"></div>
+    <div id="fontSamples">
+    </div>
 
     <!-- Dark Mode Toggle Switch -->
     <div class="toggle-switch">
@@ -179,12 +209,19 @@
 
     <script>
         let currentText = "Sample Text";
-
+        let currentSize = "50px";
+        console.log(currentSize);
+        
         function loadFonts(event) {
             const fontContainer = document.getElementById('fontSamples');
-            const fontButton = document.getElementById('fontButton'); 
-            fontContainer.innerHTML = ''; 
-
+            const fontButton = document.getElementById('fontButton');
+            const fontParams = document.getElementById('fontParams');
+            const fontSize = document.getElementById('fontSize');
+            
+            fontContainer.innerHTML = '';
+            
+            fontParams.style.display="inline-block";
+            
             const files = Array.from(event.target.files);
 
             files.forEach((file, index) => {
@@ -207,6 +244,7 @@
                     sample.classList.add('font-sample');
                     sample.style.fontFamily = fontName;
                     sample.innerText = currentText;
+                    sample.style.fontSize = currentSize;
                     sampleContainer.appendChild(sample);
 
                     fontContainer.appendChild(sampleContainer);
@@ -221,6 +259,19 @@
             document.querySelectorAll('.font-sample').forEach(sample => {
                 sample.innerText = currentText;
             });
+        }
+
+        function updateSize(size, unit) {
+            currentSize = size + unit;
+
+            const samples = document.getElementsByClassName('font-sample');
+            for (let i = 0; i < samples.length; i++) {
+                let sample = samples[i];
+                sample.style.fontSize = size + unit;
+            }
+            
+            const fontSizeLabel = document.querySelector("label[for=fontSize]");
+            fontSizeLabel.textContent = size + unit;                
         }
 
         // Toggle between light and dark modes
