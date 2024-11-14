@@ -110,7 +110,7 @@
         }
         
         label[for=fontSize]{
-            width:4em;
+            width:3ch;
         }
         
         /* Dark Mode Styles */
@@ -192,8 +192,25 @@
 
     <div id="fontParams">
         <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
-        <input type="range" id="fontSize" class="range-slider" min="5" max="200" value="50" autocomplete="off" oninput="updateSize(this.value, 'px')">
-        <label for="fontSize"><span>50</span>px</label>
+        <input type="range" id="fontSize" class="range-slider" min="5" max="200" value="50" autocomplete="off" oninput="updateSize(this.value, currentSizeUnit)">
+        <label for="fontSize">50</label>
+        <select type="select" id="fontSizeUnit" class="dropdown" autocomplete="off" oninput="updateSize(currentSize, this.value)">
+			<option value="%">%</option>
+			<option value="ch">ch</option>
+			<option value="cm">cm</option>
+			<option value="em">em</option>
+			<option value="ex">ex</option>
+			<option value="in">in</option>
+			<option value="mm">mm</option>
+			<option value="pc">pc</option>
+			<option value="pt">pt</option>
+			<option value="px" selected>px</option>
+			<option value="rem">rem</option>
+			<option value="vh">vh</option>
+			<option value="vmax">vmax</option>
+			<option value="vmin">vmin</option>
+			<option value="vw">vw</option>
+		</select>
     </div>
 
     <div id="fontSamples">
@@ -209,8 +226,8 @@
 
     <script>
         let currentText = "Sample Text";
-        let currentSize = "50px";
-        console.log(currentSize);
+        let currentSize = "50";
+        let currentSizeUnit = "px";
         
         function loadFonts(event) {
             const fontContainer = document.getElementById('fontSamples');
@@ -244,7 +261,7 @@
                     sample.classList.add('font-sample');
                     sample.style.fontFamily = fontName;
                     sample.innerText = currentText;
-                    sample.style.fontSize = currentSize;
+                    sample.style.fontSize = currentSize + currentSizeUnit;
                     sampleContainer.appendChild(sample);
 
                     fontContainer.appendChild(sampleContainer);
@@ -262,8 +279,9 @@
         }
 
         function updateSize(size, unit) {
-            currentSize = size + unit;
-
+            currentSize = size;
+			currentSizeUnit = unit; 
+			
             const samples = document.getElementsByClassName('font-sample');
             for (let i = 0; i < samples.length; i++) {
                 let sample = samples[i];
@@ -271,7 +289,7 @@
             }
             
             const fontSizeLabel = document.querySelector("label[for=fontSize]");
-            fontSizeLabel.textContent = size + unit;                
+            fontSizeLabel.textContent = size;                
         }
 
         // Toggle between light and dark modes
