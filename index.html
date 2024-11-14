@@ -192,7 +192,7 @@
 
     <div id="fontParams">
         <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
-        <input type="range" id="fontSize" class="range-slider" min="0" max="200" step="1" value="50" autocomplete="off" oninput="updateSize(this.value, currentSizeUnit)" onwheel="changeRangeWithMouseWheel(event, this.value, this.id)">
+        <input type="range" id="fontSize" class="range-slider" min="0" max="200" step="1" value="50" autocomplete="off" oninput="updateSize(this.value, currentSizeUnit, 'click')" onwheel="changeRangeWithMouseWheel(event, this.value, this.id)">
         <label for="fontSize">50</label>
         <select type="select" id="fontSizeUnit" class="dropdown" autocomplete="off" oninput="updateSize(currentSize, this.value)">
             <option value="cm">cm</option>
@@ -269,11 +269,11 @@
             });
         }
 
-        function updateSize(size, unit, step = '') {
+        function updateSize(size, unit, source = 'click') {
             currentSize = size;
             currentSizeUnit = unit;
             
-            if (!step) { //reset default step value if switching from mousewheel control to left click
+            if (source == 'click') { //reset default step value if switching from mousewheel control to left click
                 const picker = document.getElementById('fontSize');
                 picker.setAttribute('step', '1');
             }
@@ -285,7 +285,7 @@
             }
             
             const fontSizeLabel = document.querySelector('label[for=fontSize]');
-            fontSizeLabel.textContent = (size > 2) ? Math.round(size) : size;      
+            fontSizeLabel.textContent = (size > 2) ? Math.round(size) : size; //round in case of switch from low mousewheel value to high left click value 
         }
 
         // Enable mousewheel control for range picker
@@ -295,10 +295,10 @@
             
             if (event.deltaY < 0) {
                 picker.valueAsNumber += stepValue;
-                updateSize(size, currentSizeUnit, stepValue)
+                updateSize(size, currentSizeUnit, 'wheel')
             } else {
                 picker.value -= stepValue;
-                updateSize(size, currentSizeUnit, stepValue)
+                updateSize(size, currentSizeUnit, 'wheel')
             }
             
             event.preventDefault();
