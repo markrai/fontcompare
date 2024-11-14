@@ -195,13 +195,13 @@
         <input type="range" id="fontSize" class="range-slider" min="5" max="200" value="50" autocomplete="off" oninput="updateSize(this.value, currentSizeUnit)">
         <label for="fontSize">50</label>
         <select type="select" id="fontSizeUnit" class="dropdown" autocomplete="off" oninput="updateSize(currentSize, this.value)">
-			<option value="cm">cm</option>
-			<option value="in">in</option>
-			<option value="mm">mm</option>
-			<option value="pc">pc</option>
-			<option value="pt">pt</option>
-			<option value="px" selected>px</option>
-		</select>
+            <option value="cm">cm</option>
+            <option value="in">in</option>
+            <option value="mm">mm</option>
+            <option value="pc">pc</option>
+            <option value="pt">pt</option>
+            <option value="px" selected>px</option>
+        </select>
     </div>
 
     <div id="fontSamples">
@@ -271,8 +271,8 @@
 
         function updateSize(size, unit) {
             currentSize = size;
-			currentSizeUnit = unit; 
-			
+            currentSizeUnit = unit; 
+            
             const samples = document.getElementsByClassName('font-sample');
             for (let i = 0; i < samples.length; i++) {
                 let sample = samples[i];
