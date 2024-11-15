@@ -219,26 +219,26 @@
 
         function dragOverHandler(event) {
             event.preventDefault();
-            const dropzone = document.querySelector('body');
+            const dropZone = document.querySelector('body');
             const fontButton = document.getElementById('fontButton');
             fontButton.textContent = "Drop fonts";
-            dropzone.classList.add('dragging-over');
+            dropZone.classList.add('dragging-over');
         }
         
         function dragLeaveHandler(event) {
             event.preventDefault();
-            const dropzone = document.querySelector('body');
+            const dropZone = document.querySelector('body');
             const fontButton = document.getElementById('fontButton');
             fontButton.textContent = "Choose fonts";
-            dropzone.classList.remove('dragging-over');
+            dropZone.classList.remove('dragging-over');
         }
         
         function loadFonts(event, filesource) {
             event.stopPropagation();
             event.preventDefault();
 
-            const dropzone = document.querySelector('body');
-            dropzone.classList.remove('dragging-over');
+            const dropZone = document.querySelector('body');
+            dropZone.classList.remove('dragging-over');
             
             const fontContainer = document.getElementById('fontSamples');
             const fontButton = document.getElementById('fontButton');
