@@ -20,7 +20,7 @@
             min-height: calc(99vh - 60px); /* 60px = paddings top+bottom) */
         }
 
-        body.dragging_over {
+        body.dragging-over {
             border: 2px dashed #fff;
             background-color: #666;
         }
@@ -222,7 +222,7 @@
             const dropzone = document.querySelector('body');
             const fontButton = document.getElementById('fontButton');
             fontButton.textContent = "Drop fonts";
-            dropzone.classList.add('dragging_over');
+            dropzone.classList.add('dragging-over');
         }
         
         function dragLeaveHandler(event) {
@@ -230,7 +230,7 @@
             const dropzone = document.querySelector('body');
             const fontButton = document.getElementById('fontButton');
             fontButton.textContent = "Choose fonts";
-            dropzone.classList.remove('dragging_over');
+            dropzone.classList.remove('dragging-over');
         }
         
         function loadFonts(event, filesource) {
@@ -238,7 +238,7 @@
             event.preventDefault();
 
             const dropzone = document.querySelector('body');
-            dropzone.classList.remove('dragging_over');
+            dropzone.classList.remove('dragging-over');
             
             const fontContainer = document.getElementById('fontSamples');
             const fontButton = document.getElementById('fontButton');
