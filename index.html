@@ -17,10 +17,11 @@
             gap: 20px;
             font-family: sans-serif;
             transition: background-color 0.3s, color 0.3s;
-            min-height: calc(99vh - 60px); /* 60px = paddings top+bottom) */
+            min-height: calc(100vh - 64px); /* 100vh - (paddings top/bottom + botders top/bottom) */
+            border: 2px solid #E5E4E2;
         }
 
-        body.dragging-over {
+        .dragging-over {
             border: 2px dashed #fff;
             background-color: #666;
         }
