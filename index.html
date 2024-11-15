@@ -20,10 +20,10 @@
             min-height: calc(99vh - 60px); /* 60px = paddings top+bottom) */
         }
 
-		body.dragging_over {
-			border: 2px dashed #fff;
-			background-color: #666;
-		}
+        body.dragging_over {
+            border: 2px dashed #fff;
+            background-color: #666;
+        }
 
         .logo {
             max-width: 500px;
@@ -217,21 +217,21 @@
         let currentText = "Sample Text";
         let currentSize = "50px";
 
-		function dragOverHandler(event) {
-			event.preventDefault();
-			const dropzone = document.querySelector('body');
-			const fontButton = document.getElementById('fontButton');
-			fontButton.textContent = "Drop fonts";
-			dropzone.classList.add('dragging_over');
-		}
-		
-		function dragLeaveHandler(event) {
-			event.preventDefault();
-			const dropzone = document.querySelector('body');
-			const fontButton = document.getElementById('fontButton');
-			fontButton.textContent = "Choose fonts";
-			dropzone.classList.remove('dragging_over');
-		}
+        function dragOverHandler(event) {
+            event.preventDefault();
+            const dropzone = document.querySelector('body');
+            const fontButton = document.getElementById('fontButton');
+            fontButton.textContent = "Drop fonts";
+            dropzone.classList.add('dragging_over');
+        }
+        
+        function dragLeaveHandler(event) {
+            event.preventDefault();
+            const dropzone = document.querySelector('body');
+            const fontButton = document.getElementById('fontButton');
+            fontButton.textContent = "Choose fonts";
+            dropzone.classList.remove('dragging_over');
+        }
         
         function loadFonts(event, filesource) {
             event.stopPropagation();
