@@ -1,4 +1,4 @@
-# Font Compare v1.1
+# Font Compare v1.2
 
 Font Compare is an easy way to dynamically compare locally hosted fonts.
 
@@ -10,6 +10,11 @@ Demo: https://tenacitydc.com/fontcompare
 - Type your sample text.
 - Invert font colors (dark-mode) switch at bottom right.
 - Rejoice 🎉
+
+# Changelog:
+
+- 1.2 - font size unit dropdown added.
+- 1.1 - font size range-slider added.
 
 ![{84A57382-7475-4B82-825C-9A84DD9DDB48}](https://github.com/user-attachments/assets/31558a94-af6e-45bc-a563-fc55e530fa7f)
 
