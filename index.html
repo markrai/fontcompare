@@ -198,7 +198,7 @@
     </div>
 
     <div id="fontParams">
-        <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
+        <input type="text" class="text-input" placeholder="Type text here..." autocomplete="off" oninput="updateText(this.value)" />
         <input type="range" id="fontSize" class="range-slider" min="5" max="200" value="50" autocomplete="off" oninput="updateSize(this.value, 'px')">
         <label for="fontSize"><span>50</span>px</label>
     </div>
