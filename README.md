@@ -6,7 +6,7 @@ Demo: https://tenacitydc.com/fontcompare
 
 # Instructions:
 
-- Click the green "Choose Fonts" button to load as many fonts as you'd like!
+- Click the green "Choose Fonts" button (or drag and drop) to load as many fonts as you'd like!
 - Type your sample text.
 - Invert font colors (dark-mode) switch at bottom right.
 - Rejoice 🎉
