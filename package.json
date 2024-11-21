@@ -1,0 +1,12 @@
+{
+  "name": "font-compare",
+  "version": "1.0.0",
+  "description": "Font Compare Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 80"
+  },
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
