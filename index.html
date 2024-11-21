@@ -1,195 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Font Compare v1.0</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 40px;
-            padding-bottom: 20px;
-            margin: 0;
-            background-color: #E5E4E2;
-            color: #000000;
-            gap: 20px;
-            font-family: sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-            min-height: calc(100vh - 64px); /* 100vh - (paddings top/bottom + botders top/bottom) */
-            border: 2px solid #E5E4E2;
-        }
+    <link rel="stylesheet" href="css/style.css">
 
-        .dragging-over {
-            border: 2px dashed #fff;
-            background-color: #666;
-        }
-
-        .logo {
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
-
-        .font-sample-container {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .font-filename {
-            font-size: 14px;
-            color: #555555;
-            margin-bottom: 5px;
-        }
-
-        #fontSamples {
-            width: 100%;
-        }
-        
-        .font-sample {
-            font-size: 50px;
-            margin: 0px auto;
-            max-width: 90%;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .text-input {
-            padding: 10px;
-            font-size: 18px;
-            width: 300px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .text-input:focus {
-            border-color: #007BFF;
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 300px;
-        }
-
-        .file-input {
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .custom-file-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #317b45;
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .custom-file-button:hover {
-            background-color: #0056b3;
-        }
-    
-        /* Font Parameters Styles */
-        #fontParams * {
-            display: inline-block;
-        }
-        
-        #fontParams {
-            display: none;
-        }
-        
-        .range-slider{
-            vertical-align: middle;
-            accent-color: #ff2f34;
-        }
-        
-        label[for=fontSize]{
-            width:3ch;
-        }
-        
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #000000;
-            color: #ffffff;
-        }
-
-        body.dark-mode .text-input {
-            border-color: #444444;
-        }
-
-        /* Toggle Switch Styles */
-        .toggle-switch {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: black;
-            gap: 10px;
-        }
-
-        .toggle-switch label {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 25px;
-        }
-
-        .toggle-switch input {
-            display: none;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: black;
-            transition: background-color 0.3s;
-            border-radius: 15px;
-        }
-
-        .slider::before {
-            content: "";
-            position: absolute;
-            width: 21px;
-            height: 21px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
-
-        /* Checked State */
-        .toggle-switch input:checked + .slider {
-            background-color: white;
-        }
-
-        .toggle-switch input:checked + .slider::before {
-            transform: translateX(25px);
-            background-color: black;
-        }
-    </style>
 </head>
-<body ondragover="dragOverHandler(event)" ondragleave="dragLeaveHandler(event)" ondrop="loadFonts(event, 'drop')">
-    
+
+<body ondragover="dragOverHandler(event)" ondragleave="dragLeaveHandler(event)" ondrop="loadFonts(event, 'drop')"
+    oncontextmenu="openColorPicker(event)">
+
     <img src="logolight.png" alt="Logo" class="logo" id="logo">
 
     <div class="file-input-wrapper">
@@ -199,9 +21,12 @@
 
     <div id="fontParams">
         <input type="text" class="text-input" placeholder="Type text here..." oninput="updateText(this.value)" />
-        <input type="range" id="fontSize" class="range-slider" min="0" max="200" step="1" value="50" autocomplete="off" oninput="updateSize(this.value, currentSizeUnit, 'click')" onwheel="changeRangeWithMouseWheel(event, this.value, this.id)">
+        <input type="range" id="fontSize" class="range-slider" min="1" max="200" step="1" value="50" autocomplete="off"
+            oninput="updateSize(this.value, currentSizeUnit, 'click')"
+            onwheel="changeRangeWithMouseWheel(event, this.value, this.id)">
         <label for="fontSize">50</label>
-        <select type="select" id="fontSizeUnit" class="dropdown" autocomplete="off" oninput="updateSize(currentSize, this.value)">
+        <select type="select" id="fontSizeUnit" class="dropdown" autocomplete="off"
+            oninput="updateSize(currentSize, this.value)">
             <option value="cm">cm</option>
             <option value="in">in</option>
             <option value="mm">mm</option>
@@ -214,154 +39,10 @@
     <div id="fontSamples">
     </div>
 
-    <!-- Dark Mode Toggle Switch -->
-    <div class="toggle-switch">
-        <label>
-            <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
-            <span class="slider"></span>
-        </label>
-    </div>
 
-    <script>
-        let currentText = "Sample Text";
-        let currentSize = "50";
-        let currentSizeUnit = "px";
-      
-        function dragOverHandler(event) {
-            event.preventDefault();
-            const dropZone = document.querySelector('body');
-            const fontButton = document.getElementById('fontButton');
-            fontButton.textContent = "Drop fonts";
-            dropZone.classList.add('dragging-over');
-        }
-        
-        function dragLeaveHandler(event) {
-            event.preventDefault();
-            const dropZone = document.querySelector('body');
-            const fontButton = document.getElementById('fontButton');
-            fontButton.textContent = "Choose fonts";
-            dropZone.classList.remove('dragging-over');
-        }
-        
-        function loadFonts(event, filesource) {
-            event.stopPropagation();
-            event.preventDefault();
+    <input type="color" id="backgroundColorPicker" />
+    <input type="color" id="fontColorPicker" />
 
-            const dropZone = document.querySelector('body');
-            dropZone.classList.remove('dragging-over');
-            
-            const fontContainer = document.getElementById('fontSamples');
-            const fontButton = document.getElementById('fontButton');
-            const fontParams = document.getElementById('fontParams');
-            const fontSize = document.getElementById('fontSize');
-            
-            fontContainer.innerHTML = '';
-            
-            fontParams.style.display="inline-block";
-            
-            const files = (filesource == 'picker') ? Array.from(event.target.files) : Array.from(event.dataTransfer.files);
-            files.forEach((file, index) => {
-                const fontName = `CustomFont${index}`;
-                const fontUrl = URL.createObjectURL(file);
-
-                const fontFace = new FontFace(fontName, `url(${fontUrl})`);
-                fontFace.load().then((loadedFont) => {
-                    document.fonts.add(loadedFont);
-
-                    const sampleContainer = document.createElement('div');
-                    sampleContainer.classList.add('font-sample-container');
-
-                    const fileNameDisplay = document.createElement('div');
-                    fileNameDisplay.classList.add('font-filename');
-                    fileNameDisplay.innerText = file.name;
-                    sampleContainer.appendChild(fileNameDisplay);
-
-                    const sample = document.createElement('div');
-                    sample.classList.add('font-sample');
-                    sample.style.fontFamily = fontName;
-                    sample.innerText = currentText;
-                    sample.style.fontSize = currentSize + currentSizeUnit;
-                    sampleContainer.appendChild(sample);
-
-                    fontContainer.appendChild(sampleContainer);
-                });
-            });
-
-            fontButton.innerText = `Choose Fonts (${files.length})`;
-        }
-
-        function updateText(text) {
-            currentText = text;
-            document.querySelectorAll('.font-sample').forEach(sample => {
-                sample.innerText = currentText;
-            });
-        }
-
-        function updateSize(size, unit, source = 'click') {
-            currentSize = size;
-            currentSizeUnit = unit;
-            
-            if (source == 'click') { //reset default step value if switching from mousewheel control to left click
-                const picker = document.getElementById('fontSize');
-                picker.setAttribute('step', '1');
-            }
-            
-            const samples = document.getElementsByClassName('font-sample');
-            for (let i = 0; i < samples.length; i++) {
-                let sample = samples[i];
-                sample.style.fontSize = size + unit;
-            }
-            
-            const fontSizeLabel = document.querySelector('label[for=fontSize]');
-            fontSizeLabel.textContent = (size > 2) ? Math.round(size) : size; //round in case of switch from low mousewheel value to high left click value 
-        }
-
-        // Enable mousewheel control for range picker
-        function changeRangeWithMouseWheel(event, size, pickerID) {
-            const picker = document.getElementById(pickerID);
-            let stepValue = parseFloat(_changeGranularity(size, currentSize, pickerID));
-            
-            if (event.deltaY < 0) {
-                picker.valueAsNumber += stepValue;
-                updateSize(size, currentSizeUnit, 'wheel')
-            } else {
-                picker.value -= stepValue;
-                updateSize(size, currentSizeUnit, 'wheel')
-            }
-            
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        
-        // Helper - Change granularity of range picker
-        function _changeGranularity(newSize, previousSize, pickerID) {
-            const picker = document.getElementById(pickerID);
-            if ( newSize < 2 ) {
-                picker.setAttribute('step', '0.1');
-                return 0.1;
-            } else if ( newSize > 2 && previousSize <= 2 ) {
-                picker.setAttribute('step', '1');
-                return 1;
-            } else {
-                return 1;
-            }
-        }
-        
-        // Toggle between light and dark modes
-        function toggleDarkMode() {
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            document.body.classList.toggle('dark-mode', darkModeToggle.checked);
-            
-            const logo = document.getElementById('logo');
-            if (darkModeToggle.checked) {
-                logo.src = 'logodark.png';
-            } else {
-                logo.src = 'logolight.png';
-            }
-        
-        
-        
-        }
-    </script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

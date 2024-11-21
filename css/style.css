@@ -1,0 +1,239 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin: 0;
+    background-color: #E5E4E2;
+    color: #000000;
+    gap: 20px;
+    font-family: sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: calc(100vh - 64px);
+    /* 100vh - (paddings top/bottom + botders top/bottom) */
+    border: 2px solid #E5E4E2;
+    position: relative;
+}
+
+#backgroundColorPicker {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    position: fixed; 
+    top: 20px; 
+    right: 20px;
+    z-index: 1000;
+    background-color: transparent;
+}
+
+#fontColorPicker {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 1000;
+    background-color: transparent;
+}
+
+
+.dragging-over {
+    border: 2px dashed #fff;
+    background-color: #666;
+}
+
+#dragOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 999;
+}
+
+.logo {
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.font-sample-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.font-filename {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 5px;
+}
+
+#fontSamples {
+    width: 100%;
+}
+
+.font-sample {
+    font-size: 50px;
+    margin: 0px auto;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.text-input {
+    padding: 10px;
+    font-size: 18px;
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.text-input:focus {
+    border-color: #007BFF;
+}
+
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+}
+
+.file-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.custom-file-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #317b45;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.custom-file-button:hover {
+    background-color: #0056b3;
+}
+
+/* Font Parameters Styles */
+#fontParams * {
+    display: inline-block;
+}
+
+#fontParams {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    justify-content: flex-start;
+}
+
+
+#fontParams.show {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.range-slider {
+    vertical-align: middle;
+    accent-color: #ff2f34;
+}
+
+label[for=fontSize] {
+    width: 4ch; 
+    text-align: center; 
+    margin: 0 10px; 
+    display: inline-block; 
+}
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+body.dark-mode .text-input {
+    border-color: #444444;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: black;
+    gap: 10px;
+}
+
+.toggle-switch label {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    transition: background-color 0.3s;
+    border-radius: 15px;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+/* Checked State */
+.toggle-switch input:checked+.slider {
+    background-color: white;
+}
+
+.toggle-switch input:checked+.slider::before {
+    transform: translateX(25px);
+    background-color: black;
+}
