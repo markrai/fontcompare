@@ -1,4 +1,4 @@
-# Font Compare v1.3
+# Font Compare v1.4
 
 Font Compare is an easy way to dynamically compare locally hosted fonts.
 
@@ -13,6 +13,7 @@ Demo: https://tenacitydc.com/fontcompare
 
 # Changelog:
 
+- 1.4 - Added background and font color-pickers.
 - 1.3 - drag & drop to load fonts functionality, added.
 - 1.2 - font size unit dropdown added.
 - 1.1 - font size range-slider added.

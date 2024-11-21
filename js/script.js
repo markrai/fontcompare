@@ -81,13 +81,18 @@ document.addEventListener('click', function (event) {
 
 
 
-
 function loadFonts(event, filesource) {
     event.stopPropagation();
     event.preventDefault();
 
     const dropZone = document.querySelector('body');
     dropZone.classList.remove('dragging-over');
+
+    // Remove the overlay
+    const overlay = document.getElementById('dragOverlay');
+    if (overlay) {
+        overlay.remove();
+    }
 
     const fontContainer = document.getElementById('fontSamples');
     const fontButton = document.getElementById('fontButton');
@@ -102,19 +107,16 @@ function loadFonts(event, filesource) {
     const validExtensions = ['.ttf', '.otf'];
 
     files.forEach((file, index) => {
-        const validExtensions = ['.ttf', '.otf'];
         const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
         if (!validExtensions.includes(fileExtension)) {
             alert(`Invalid file type: ${file.name}`);
             return;
         }
-        
 
         if (file.size > 5 * 1024 * 1024) { // 5MB limit
             alert(`File too large: ${file.name}`);
             return;
         }
-        
 
         const fontName = `CustomFont${index}`;
         const fontUrl = URL.createObjectURL(file);
@@ -136,6 +138,7 @@ function loadFonts(event, filesource) {
             sample.style.fontFamily = fontName;
             sample.innerText = currentText;
             sample.style.fontSize = currentSize + currentSizeUnit;
+            sample.style.color = document.getElementById('fontColorPicker').value || '#000'; // Ensure color is set
             sampleContainer.appendChild(sample);
 
             fontContainer.appendChild(sampleContainer);
@@ -146,8 +149,8 @@ function loadFonts(event, filesource) {
     });
 
     fontButton.innerText = `Choose Fonts (${files.length})`;
-
 }
+
 
 
 function updateText(text) {
