@@ -18,6 +18,10 @@ Demo: https://tenacitydc.com/fontcompare
 - 1.2 - font size unit dropdown added.
 - 1.1 - font size range-slider added.
 
-![{84A57382-7475-4B82-825C-9A84DD9DDB48}](https://github.com/user-attachments/assets/31558a94-af6e-45bc-a563-fc55e530fa7f)
+![{07AD25D1-6C97-4544-A6E4-F57D1CB1D10B}](https://github.com/user-attachments/assets/8767a1cc-2a35-4691-b365-85e618463d00)
+
+
+
+
 
 
