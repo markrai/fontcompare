@@ -6,11 +6,17 @@ function dragOverHandler(event) {
     event.preventDefault();
     const dropZone = document.querySelector('body');
     dropZone.classList.add('dragging-over');
-    const overlay = document.createElement('div');
-    overlay.id = 'dragOverlay';
-    overlay.innerText = "Drop your font files here";
-    document.body.appendChild(overlay);
+    
+    // Check if overlay already exists
+    if (!document.getElementById('dragOverlay')) {
+        const overlay = document.createElement('div');
+        overlay.id = 'dragOverlay';
+        overlay.innerText = "Drop your font files here";
+        document.body.appendChild(overlay);
+    }
 }
+
+
 
 function dragLeaveHandler(event) {
     event.preventDefault();
@@ -96,11 +102,13 @@ function loadFonts(event, filesource) {
     const validExtensions = ['.ttf', '.otf'];
 
     files.forEach((file, index) => {
-        const fileExtension = file.name.slice(-4).toLowerCase();
+        const validExtensions = ['.ttf', '.otf'];
+        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
         if (!validExtensions.includes(fileExtension)) {
             alert(`Invalid file type: ${file.name}`);
             return;
         }
+        
 
         if (file.size > 5 * 1024 * 1024) { // 5MB limit
             alert(`File too large: ${file.name}`);
