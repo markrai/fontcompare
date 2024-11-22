@@ -38,9 +38,16 @@
     <div id="fontSamples">
     </div>
 
-
-    <input type="color" id="backgroundColorPicker" />
-    <input type="color" id="fontColorPicker" />
+	<div id="colorPickers">
+		<div>
+			<label for="backgroundColorPicker" class="lineUp">Background color</label>
+				<input type="color" id="backgroundColorPicker" class="color-pickers" value="#cccccc" autocomplete="off"/>
+		</div>
+		<div>
+			<label for="fontColorPicker">Font color</label>
+			<input type="color" id="fontColorPicker" class="color-pickers" value="#000000" autocomplete="off"/>
+		</div>
+	</div>
 
     <script src="js/script.js"></script>
 </body>
