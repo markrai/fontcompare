@@ -166,10 +166,8 @@ body {
 }
 
 label[for=fontSize] {
-    width: 4ch; 
-    text-align: center; 
-    margin: 0 10px; 
-    display: inline-block; 
+    width: 2ch;
+    display: inline-block;
 }
 
 
