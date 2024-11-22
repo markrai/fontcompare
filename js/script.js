@@ -29,34 +29,6 @@ function dragLeaveHandler(event) {
 }
 
 
-function openColorPicker(event) {
-    event.preventDefault();
-
-    const isFontColorPicker = event.shiftKey; // Hold Shift to open font color picker
-    const colorPicker = isFontColorPicker
-        ? document.getElementById('fontColorPicker')
-        : document.getElementById('backgroundColorPicker');
-    
-    const pickerWidth = 200;
-    const pickerHeight = 200;
-    let posX = event.pageX;
-    let posY = event.pageY;
-
-    if (posX + pickerWidth > window.innerWidth) {
-        posX -= pickerWidth;
-    }
-    if (posY + pickerHeight > window.innerHeight) {
-        posY -= pickerHeight;
-    }
-
-    colorPicker.style.left = `${posX}px`;
-    colorPicker.style.top = `${posY}px`;
-    colorPicker.style.display = 'block';
-
-    colorPicker.click();
-}
-
-
 document.getElementById('fontColorPicker').addEventListener('input', function (event) {
     document.querySelectorAll('.font-sample').forEach(sample => {
         sample.style.color = event.target.value;
