@@ -16,32 +16,44 @@ body {
     position: relative;
 }
 
-#backgroundColorPicker {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    border: none;
-    padding: 0;
+#colorPickers {
     position: fixed; 
     top: 20px; 
     right: 20px;
     z-index: 1000;
     background-color: transparent;
+    display:flex;
+    flex-direction: column;
 }
 
-#fontColorPicker {
-    width: 40px;
+#colorPickers > div {
+    display: flex;
+    justify-content: space-between; 
+}
+
+#colorPickers label {
+	align-content: center;
+	margin-right: 0.3rem;	
+	margin-left: auto;	
+	overflow: visible;
+	text-wrap: nowrap;
+	opacity: 0;
+	transform: translateX(0);
+	transition: opacity .7s ease, transform .7s ease; 
+}
+
+.color-pickers {
+	flex:0 0 40px;
     height: 40px;
     cursor: pointer;
     border: none;
     padding: 0;
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    z-index: 1000;
-    background-color: transparent;
 }
 
+#colorPickers:has(.color-pickers:hover) label, #colorPickers:has(.color-pickers:focus) label {
+	opacity: 1;
+	transform: translateX(-1.5rem);
+}
 
 .dragging-over {
     border: 2px dashed #fff;
@@ -63,7 +75,6 @@ body {
     font-size: 2em;
     z-index: 1000;
 }
-
 
 .logo {
     max-width: 500px;
@@ -152,7 +163,6 @@ body {
     gap: 10px; 
     justify-content: flex-start;
 }
-
 
 #fontParams.show {
     display: flex;
